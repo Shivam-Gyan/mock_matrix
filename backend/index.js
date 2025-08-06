@@ -26,14 +26,11 @@ app.get('/', (req, res) => {
 
 // dynamic routes features 
 import DummyRouter from './routes/json.route.js';
-import dataRoutes from './routes/dataRoutes.js';
 
 
 // Using the DummyRouter for handling JSON responses
 app.use('/api/v1', DummyRouter);
 
-// Data routes (no schema required)
-app.use('/api/data', dataRoutes);
 
 // Start server
 app.listen(PORT, () => {
