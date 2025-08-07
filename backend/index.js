@@ -45,11 +45,13 @@ app.get('/', (req, res) => {
 // dynamic routes features 
 import DummyRouter from './routes/json.route.js';
 import AuthRouter from './routes/auth.json.routes.js';
+import projectRouter from './routes/project.route.js';
 
 
 // Using the DummyRouter for handling JSON responses
 app.use('/api/v1', DummyRouter);
 app.use('/api/v1/auth', AuthRouter);
+app.use('/api/v1/projects', projectRouter);
 
 
 // Start server
