@@ -23,6 +23,6 @@ DummyRouter
     .get('/posts', jsonController.getPostsJson) // This route handles GET requests to '/posts' and responds with posts JSON data
     .get('/carts', jsonController.getCartsJson) // This route handles GET requests to '/carts' and responds with carts JSON data
     .get('/images', jsonController.getImagesJson) // This route handles GET requests to '/images' and responds with images JSON data
-
+    .get('/http/:status', jsonController.getHttpStatusJson) // This route handles GET requests to '/http/status' and responds with HTTP status JSON data
     
 export default DummyRouter;

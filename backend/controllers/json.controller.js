@@ -10,13 +10,13 @@ const getCollection = (name) => mongoose.connection.db.collection(name);
 // This function will be used to apply query options to the MongoDB cursor
 // It takes the request object and a cursor as parameters
 // It returns the modified cursor with the applied options
-const applyQueryOptions = (req, cursor) => {    
+const applyQueryOptions = (req, cursor) => {
     // 1. Limit logic
     const limit = Math.max(1, Math.min(parseInt(req.query.limit) || 10, 1000));
     cursor = cursor.limit(limit);
 
     // 2. Projection logic with _id: 0 always
-    const projection = { _id: 0};
+    const projection = { _id: 0 };
 
     if (req.query.fields) {
         projection['id'] = 1;
@@ -197,6 +197,37 @@ const jsonController = {
             });
         } catch (error) {
             console.error(`❌ Error fetching images JSON: ${error.message}`);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
+    // This controller handles HTTP status code requests
+    // It returns a JSON response based on the HTTP status code provided in the request
+    getHttpStatusJson: async (req, res) => {
+        try {
+            const status = parseInt(req.params.status, 10);
+            // Validate the status code
+            // Ensure the status code is a number and within the valid range (100-599)
+            if (isNaN(status) || status < 100 || status > 599) {
+                return res.status(400).json({ success: false, status: status, message: "Invalid HTTP status code", description: "The provided status code is not valid." });
+            }
+
+            // Handle specific HTTP status codes with custom messages
+            // You can customize the messages and descriptions as needed
+            if (status === 200) { // For 200 OK, return a success message
+                return res.status(200).json({ success: true, message: "OK", status: 200, description: "The request has succeeded." });
+            } else if (status === 404) { // For 404 Not Found, return a specific message
+                return res.status(404).json({ success: true, message: "Not Found", status: 404, description: "The requested resource could not be found." });
+            } else if (status === 500) { // For 500 Internal Server Error, return a generic message
+                return res.status(500).json({ success: true, message: "Internal Server Error", status: 500, description: "The server encountered an unexpected condition." });
+            } else { // For other status codes, return a generic message
+                res.status(status).json({
+                    success: false,
+                    message: `HTTP status ${status} response`
+                });
+            }
+        } catch (error) {
+            console.error(`❌ Error fetching HTTP status JSON: ${error.message}`);
             res.status(500).json({ message: "Internal Server Error" });
         }
     }
