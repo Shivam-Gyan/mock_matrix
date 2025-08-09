@@ -10,7 +10,6 @@ const Home = () => {
       <Herosection />
       <About />
       <Craft />
-      {/* <CodeEditor/> */}
     </div>
   )
 }

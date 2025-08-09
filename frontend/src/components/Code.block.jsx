@@ -8,14 +8,8 @@ import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-github_dark";
 import "ace-builds/src-noconflict/ext-language_tools";
 
-export default function CodeEditor() {
-    const [code, setCode] = useState(
-`{
-    "name":"mock matrix",
-    "email":"mock-matrix.com",
-    "password":"Mockpass123@"
-}`);
-
+export default function CodeEditor({setCode,code}) {
+   
     return (
         <div className="w-full max-w-md z-30 h-72 border border-gray-300 rounded-md overflow-hidden">
             <AceEditor

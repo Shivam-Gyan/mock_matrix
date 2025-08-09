@@ -67,7 +67,7 @@ const Herosection = () => {
       </div>
 
           {/* this section i am talking about */}
-      <section className="relative flex mt-24 p-10 z-30 ml-6 mb-10 md:ml-16 flex-col lg:flex-row-reverse justify-between w-4xl ">
+      <section className="relative flex mt-24 p-10 z-30 ml-0 mb-10 md:ml-16 flex-col lg:flex-row-reverse justify-between w-4xl ">
         <div className=" flex gap-5 backdrop-blur-2xl w-fit max-lg:mb-5 items-start">
         {/* <div className="absolute z-30 top-3/4 right-10  md:right-1/3 flex gap-5 items-start"> */}
           <motion.div animate={{ rotate: 360 }}
