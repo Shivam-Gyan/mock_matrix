@@ -13,10 +13,10 @@ const Herosection = () => {
 
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
+    <div className="relative  h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
       {/* Background line (SVG) */}
       <svg
-        className="absolute inset-0 -z-10 w-full h-full"
+        className="absolute inset-0 z-10 w-full h-full"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
       >
@@ -31,25 +31,19 @@ const Herosection = () => {
           vectorEffect="non-scaling-stroke"
           strokeLinecap="round"
         />
-        {/* Optional thinner mobile path */}
-        {/* <path
-          className="hidden"
-          d="M0,80 H55 L70,65 H100"
-          fill="none"
-         
-
-          strokeWidth="10"
-          vectorEffect="non-scaling-stroke"
-          strokeLinecap="round"
-        /> */}
       </svg>
 
       {/* Hero image on the right */}
-      <div className="absolute max-sm:hidden z-20 bottom-0 right-10 w-[350px] sm:w-[380px] md:w-[520px]">
+      <div className="absolute max-sm:hidden z-20 bottom-0 right-10 w-[350px] sm:w-[380px] md:w-[380px] lg:w-[520px]">
         <img src={herosection3} alt="" className="object-cover w-full h-full" />
       </div>
 
-      <div className="p-10 z-30 ml-6 md:ml-16 relative ">
+      <div className="absolute max-sm:hidden top-10 right-10 md:top-1/4 md:left-1/2 z-30 flex w-fit items-center gap-2 backdrop-blur-3xl p-3 rounded-lg border-[1px] border-gray-200">
+        <span className="w-2 h-2  rounded-full bg-red-500"></span>
+        <p className="font-inconsolata text-sm">Build JSON, share in seconds</p>
+      </div>
+
+      <div className="p-10 z-30 ml-6 mb-10 md:ml-16 relative ">
         <motion.div
           className="absolute top-16 -left-1 pointer-events-none text-lg rounded-full text-center nunito-600 pt-[2px] text-gray-400 w-8 h-8 bg-gray-100"
           animate={{ rotate: [0, 40, 0] }}
@@ -72,39 +66,44 @@ const Herosection = () => {
         </div>
       </div>
 
-      <div className="absolute z-30 top-3/4 right-10 md:right-1/3 flex gap-5 items-start">
-        <motion.div animate={{ rotate: 360 }}
-          transition={{
-            repeat: Infinity,
-            duration: 2, // speed in seconds
-            ease: "linear", // smooth continuous spin
-          }} className="border-[3px] border-gray-300 w-14 h-14 rounded-full flex items-center justify-center">
-          <i className="fi fi-sr-circle-nodes mt-1 text-gray-500"></i>
-        </motion.div>
-        <p className="text-sm w-64 bg-blend-overlay text-slate-900  nunito-600 md:text-gray-400 mb-3 sm:nunito-400 ">In this AI-powered future, forget boring <span className="text-gray-500 nunito-600">JSON</span> spin up custom data and a shareable link in seconds. Fast, smart, effortless.</p>
-      </div>
-
-      <section className="absolute z-30 top-3/4 left-32 -mt-5 md:right-1/3 flex flex-col">
-        <h1 className="nunito-600 text-sm text-gray-400 mb-4">Trusted by many users</h1>
-        <div className="relative flex">
-          {image?.map((img, index) => (
-            <div
-              key={index}
-              className="w-16 h-16 rounded-full overflow-hidden border-4 border-gray-300 absolute"
-              style={{ left: `${index * 2.5}rem` }} // Adjust 2.5rem for overlap spacing
-            >
-              <img
-                src={img}
-                alt={`Hero section ${index}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          ))}
-
-          <div className="absolute left-48 top-5 font-inconsolata">
-            +{image.length + 4} more
-          </div>
+          {/* this section i am talking about */}
+      <section className="relative flex mt-24 p-10 z-30 ml-6 mb-10 md:ml-16 flex-col lg:flex-row-reverse justify-between w-4xl ">
+        <div className=" flex gap-5 backdrop-blur-2xl w-fit max-lg:mb-5 items-start">
+        {/* <div className="absolute z-30 top-3/4 right-10  md:right-1/3 flex gap-5 items-start"> */}
+          <motion.div animate={{ rotate: 360 }}
+            transition={{
+              repeat: Infinity,
+              duration: 2, // speed in seconds
+              ease: "linear", // smooth continuous spin
+            }} className="border-[3px] border-gray-300 w-14 h-14 rounded-full flex items-center justify-center">
+            <i className="fi fi-sr-circle-nodes mt-1 text-gray-500"></i>
+          </motion.div>
+          <p className="text-sm w-72 lg:w-64 bg-blend-overlay text-slate-900  nunito-600 md:text-gray-400 mb-3 sm:nunito-400 ">In this AI-powered future, forget boring <span className="text-gray-500 nunito-600">JSON</span> spin up custom data and a shareable link in seconds. Fast, smart, effortless.</p>
         </div>
+
+        {/* <section className="absolute z-30 top-3/4 left-32 -mt-5 md:right-1/3 flex flex-col"> */}
+        <section className="flex flex-col ">
+          <h1 className="nunito-600 text-sm text-gray-400 mb-4">Trusted by many users</h1>
+          <div className="relative flex">
+            {image?.map((img, index) => (
+              <div
+                key={index}
+                className="w-16 h-16 rounded-full overflow-hidden border-4 border-gray-300 absolute"
+                style={{ left: `${index * 2.5}rem` }} // Adjust 2.5rem for overlap spacing
+              >
+                <img
+                  src={img}
+                  alt={`Hero section ${index}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+
+            <div className="absolute left-48 top-5 font-inconsolata">
+              +{image.length + 4} more
+            </div>
+          </div>
+        </section>
       </section>
 
     </div>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import logo from '../../assets/logo.png';
 
 const Navbar = () => {
@@ -22,7 +23,12 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex gap-8 items-center md:mr-5">
-            <Link to="/about" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">About</Link>
+            <HashLink smooth  to="/#about" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">
+              About
+            </HashLink>
+            <HashLink smooth  to="/#generate" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">
+              Generate
+            </HashLink>
             <Link to="/docs" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Documentation</Link>
             <Link to="/services" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</Link>
             <Link to="/contact" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</Link>
@@ -33,7 +39,9 @@ const Navbar = () => {
             <div className="max-md:hidden flex items-center gap-1">
               <span className="text-gray-700 nunito-400 text-sm">john doe</span>
               <div className="rounded-full p-[2px] bg-gradient-to-r from-red-500 via-blue-500 to-green-500">
-                <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                <div className="w-10 h-10 overflow-hidden rounded-full bg-gray-200">
+                  <img src="https://tse2.mm.bing.net/th/id/OIP.MNYMRopweKA9axhd73z_GwHaE8?pid=Api&P=0&h=180" alt="" className='w-full h-full object-cover' />
+                </div>
               </div>
             </div> :
             <div className="flex max-md:hidden gap-5 items-center">
@@ -49,7 +57,9 @@ const Navbar = () => {
             <div className="max-sm:hidden flex items-center gap-1">
               <span className="text-gray-700">john doe</span>
               <div className="rounded-full p-[2px] bg-gradient-to-r from-red-500 via-blue-500 to-green-500">
-                <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                <div className="w-10 h-10  overflow-hidden rounded-full bg-gray-200">
+                  <img src="https://tse2.mm.bing.net/th/id/OIP.MNYMRopweKA9axhd73z_GwHaE8?pid=Api&P=0&h=180" alt="" className='w-full h-full object-cover' />
+                </div>
               </div>
             </div> :
             <div className="flex max-sm:hidden gap-5 items-center">
@@ -76,7 +86,8 @@ const Navbar = () => {
               <div className=''>
                 <h1 className='text-lg nunito-600 my-4 border-b-[1px] border-gray-200'>Menu</h1>
                 <nav className="flex ml-6 flex-col space-y-4 text-gray-700">
-                  <Link to="/about" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">About</Link>
+                  <HashLink smooth to="/#about" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">About</HashLink>
+                  <HashLink smooth to="/#generate" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Generate</HashLink>
                   <Link to="/docs" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Docs</Link>
                   <Link to="/services" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</Link>
                   <Link to="/contact" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</Link>
@@ -88,7 +99,9 @@ const Navbar = () => {
                   auth ? (
                     <div className=" flex items-center gap-1">
                       <div className="rounded-full p-[2px] bg-gradient-to-r from-red-500 via-blue-500 to-green-500">
-                        <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                        <div className="w-10 h-10  overflow-hidden rounded-full bg-gray-200">
+                          <img src="https://tse2.mm.bing.net/th/id/OIP.MNYMRopweKA9axhd73z_GwHaE8?pid=Api&P=0&h=180" alt="" className='w-full h-full object-cover' />
+                        </div>
                       </div>
                       <span className="text-gray-700">@john doe</span>
                     </div>

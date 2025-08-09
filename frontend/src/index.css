@@ -14,7 +14,7 @@
     @apply text-sm text-gray-400 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
 }
 .nav-link-text-md {
-    @apply text-md text-gray-400 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
+    @apply text-base text-gray-400 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
 }
 
 
