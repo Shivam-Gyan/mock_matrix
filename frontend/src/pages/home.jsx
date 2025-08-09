@@ -1,8 +1,8 @@
-import React from 'react'
 import Herosection from '../components/Herosection'
 import Craft from '../components/Craft'
 import About from '../components/About'
-import CodeEditor from '../components/Code.block'
+import Services from '../components/Services'
+import ContactUs from '../components/Contact.us'
 
 const Home = () => {
   return (
@@ -10,6 +10,8 @@ const Home = () => {
       <Herosection />
       <About />
       <Craft />
+      <Services />
+      <ContactUs />
     </div>
   )
 }

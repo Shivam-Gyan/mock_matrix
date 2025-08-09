@@ -13,7 +13,7 @@ const Herosection = () => {
 
 
   return (
-    <div className="relative  h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
+    <div className="relative lg:h-[calc(100vh-4rem)]  min-h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
       {/* Background line (SVG) */}
       <svg
         className="absolute inset-0 z-10 w-full h-full"

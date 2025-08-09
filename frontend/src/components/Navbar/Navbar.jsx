@@ -30,8 +30,8 @@ const Navbar = () => {
               Generate
             </HashLink>
             <Link to="/docs" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Documentation</Link>
-            <Link to="/services" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</Link>
-            <Link to="/contact" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</Link>
+            <HashLink smooth to="/#services" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</HashLink>
+            <HashLink smooth to="/#contact" className="nav-link-text font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</HashLink>
           </nav>
 
           {/* Avatar */}
@@ -89,8 +89,8 @@ const Navbar = () => {
                   <HashLink smooth to="/#about" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">About</HashLink>
                   <HashLink smooth to="/#generate" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Generate</HashLink>
                   <Link to="/docs" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Docs</Link>
-                  <Link to="/services" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</Link>
-                  <Link to="/contact" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</Link>
+                  <HashLink smooth to="/#services" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Services</HashLink>
+                  <HashLink smooth to="/#contact" onClick={() => setIsMobileOpen(false)} className="nav-link-text-md font-inconsolata text-gray-700 hover:text-blue-600 transition">Contact</HashLink>
                 </nav>
               </div>
               <div className='flex flex-col justify-center'>

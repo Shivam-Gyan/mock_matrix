@@ -3,7 +3,9 @@ import CodeEditor from './Code.block.jsx'
 import ModalInstruction from './modal.instruction.jsx'
 import ModalProject from './Modal.Project.jsx';
 import { createData } from '../services/database.services.jsx';
-import {toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
+
+const auth = true;
 
 const Craft = () => {
     const [showModal, setShowModal] = useState(false);
@@ -17,7 +19,7 @@ const Craft = () => {
         projectPassword: "",
     })
     const [code, setCode] = useState(
-    `
+        `
 // below code is testing purpose
 // Please replace with your actual data
 {
@@ -27,6 +29,11 @@ const Craft = () => {
 }`);
 
     const handleGenerate = async () => {
+        if (!code) {
+            toast.error('Please enter valid JSON schema');
+            return;
+        }
+
         setLoading(true);
         // await setProjectData({ ...projectData, json: JSON.parse(code), schema: JSON.parse(code) });
         try {
@@ -59,8 +66,8 @@ const Craft = () => {
 
     return (
         // <section className="relative  h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
-        <main id="generate" className="h-screen mb-10">
-            <section className="mx-auto max-w-6xl px-6 sm:px-8 pt-16 pb-8">
+        <main id="generate" className="min-h-screen mb-10">
+            <section className="mx-auto max-w-6xl px-6 sm:px-8 pt-12 pb-8">
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-nunito tracking-tight text-slate-700">
                     Generate <span className="text-slate-500">JSON</span> <i className='fi fi-br-bracket-curly text-4xl' /> <i className='fi fi-br-bracket-curly-right text-4xl' />
                 </h1>
@@ -176,12 +183,12 @@ const Craft = () => {
                             <input
                                 type="checkbox"
                                 checked={projectData.projectType === "aicustom"}
-                                 onChange={() => {
+                                onChange={() => {
                                     setGeneratedUrl("")
-                                    
+
                                     setProjectData((prev) => ({
-                                        projectName:"",
-                                        projectPassword:"",
+                                        projectName: "",
+                                        projectPassword: "",
                                         projectType: "aicustom",
                                     }));
                                 }}
@@ -208,10 +215,10 @@ const Craft = () => {
                                 checked={projectData.projectType === "custom"}
                                 onChange={() => {
                                     setGeneratedUrl("")
-                                    
+
                                     setProjectData((prev) => ({
-                                        projectName:"",
-                                        projectPassword:"",
+                                        projectName: "",
+                                        projectPassword: "",
                                         projectType: "custom",
                                     }));
                                 }}
@@ -255,7 +262,17 @@ const Craft = () => {
                                 Quickly generate JSON data based on your schema.
                             </p>
                             <button
-                                onClick={() => setShowProjectModal(true)}
+                                onClick={() => {
+                                    if (!auth) {
+                                        toast.error('Please login to generate project');
+                                        return;
+                                    }
+                                    if (!code) {
+                                        toast.error('Please enter valid JSON schema');
+                                        return;
+                                    }
+                                    setShowProjectModal(true);
+                                }}
                                 className="bg-slate-700 hover:bg-slate-800 text-white text-sm font-nunito mt-4 px-3 py-1 rounded-md transition-colors"
                             >
                                 Generate
