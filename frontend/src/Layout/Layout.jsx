@@ -1,9 +1,22 @@
+import { Outlet } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer";
 
 
 const Layout = () => {
   return (
-    <div>Layout</div>
-  )
-}
+    <div>
+      {/* <header className="font-nunito py-2 bg-yellow-50 text-sm font-semibold text-center w-full ">welcome to MOCK MATRIX</header> */}
+      {/* Navbar */}
+      <Navbar />
 
-export default Layout
+      {/* Main content */}
+      <Outlet />
+      
+      {/* Footer */}
+     {/* <Footer /> */}
+    </div>
+  );
+};
+
+export default Layout;
