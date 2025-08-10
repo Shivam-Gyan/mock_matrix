@@ -58,8 +58,8 @@ const Herosection = () => {
         </motion.div>
 
         <p className="text-xs text-gray-400 mb-4 font-inconsolata font-medium tracking-wider uppercase">Futuristic</p>
-        <p className="text-5xl nunito-400 mb-4 z-30 tracking-normal uppercase">New Digital</p>
-        <p className="text-5xl nunito-400 tracking-normal uppercase">Universe</p>
+        <p className="text-5xl nunito-400 mb-4 z-30 tracking-normal uppercase">Imagine. <span className="text-slate-800">Create.</span></p>
+        <p className="text-5xl nunito-400 tracking-normal uppercase">Transcend</p>
         <div className="flex items-center mt-5 gap-5">
           <button onClick={() => { console.log("get started") }} className="bg-slate-800 text-white font-nunito text-sm px-3 py-2 cursor-pointer hover:bg-slate-600 rounded-md ">Get Started</button>
           <button onClick={() => { console.log("view documentation") }} className=" text-gray-600 font-nunito text-md hover:border-b-2 hover:border-gray-600 ml-4 pt-1 transition duration-200 cursor-pointer">Documentation</button>

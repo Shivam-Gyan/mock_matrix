@@ -2,14 +2,22 @@ import React from "react";
 import { motion } from "framer-motion";
 
 const steps = [
-  { title: "Define your schema", icons: ["fi-br-bracket-curly","fi-br-bracket-curly-right"],
-    body: "Start with JSON Schema, a TypeScript interface, or quick fields. Mock Matrix understands structure and constraints instantly." },
-  { title: "Generate clean, valid JSON in seconds", icons: ["fi-sr-file-edit"],
-    body: "AI builds perfectly structured mock data—no hand-formatting, no copy-paste rituals. Just press generate." },
-  { title: "Get a shareable URL", icons: ["fi-br-link-alt"],
-    body: "Access your mock data via an instant, public URL. Perfect for testing APIs, demos, and docs." },
-  { title: "Edit, version, reuse", icons: ["fi-sr-paint"],
-    body: "Save presets, tweak on the fly, and reuse configurations across projects and teams." },
+  {
+    title: "Define your schema", icons: ["fi-br-bracket-curly", "fi-br-bracket-curly-right"],
+    body: "Start with JSON Schema, a TypeScript interface, or quick fields. Mock Matrix understands structure and constraints instantly."
+  },
+  {
+    title: "Generate clean, valid JSON in seconds", icons: ["fi-sr-file-edit"],
+    body: "AI builds perfectly structured mock data—no hand-formatting, no copy-paste rituals. Just press generate."
+  },
+  {
+    title: "Get a shareable URL", icons: ["fi-br-link-alt"],
+    body: "Access your mock data via an instant, public URL. Perfect for testing APIs, demos, and docs."
+  },
+  {
+    title: "Edit, version, reuse", icons: ["fi-sr-paint"],
+    body: "Save presets, tweak on the fly, and reuse configurations across projects and teams."
+  },
 ];
 
 const container = {
@@ -27,17 +35,17 @@ function StepCard({ index, icons, title, body, align = "left" }) {
     align === "right" ? "md:flex-row-reverse md:justify-end" : "md:justify-start";
 
   return (
-    <div  className={[
-        "rounded-2xl border border-slate-700 bg-slate-800/80 backdrop-blur",
-        "p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow",
-        alignText
-      ].join(" ")}
+    <div className={[
+      "rounded-2xl border border-slate-700 bg-slate-800/80 backdrop-blur",
+      "p-5 sm:p-6 shadow-sm hover:shadow-md transition-shadow",
+      alignText
+    ].join(" ")}
     >
       <div className={[
-          "mb-2 inline-flex items-center gap-2 text-[11px] uppercase tracking-wide",
-          "text-slate-300",
-          align === "right" ? "md:flex-row-reverse" : "",
-        ].join(" ")}
+        "mb-2 inline-flex items-center gap-2 text-[11px] uppercase tracking-wide",
+        "text-slate-300",
+        align === "right" ? "md:flex-row-reverse" : "",
+      ].join(" ")}
       >
         <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-gray-100 text-slate-900 text-xs">
           {index}
@@ -45,7 +53,7 @@ function StepCard({ index, icons, title, body, align = "left" }) {
         <span className="font-semibold">Step {index}</span>
       </div>
 
-      <div className={`flex gap-2 mt-2 ${align == 'left' ? " justify-start " :"justify-end "}`}>
+      <div className={`flex gap-2 mt-2 ${align == 'left' ? " justify-start " : "justify-end "}`}>
         <div className="flex">
           {icons.map((icon, i) => (
             <i key={i} className={`fi ${icon} text-white mt-1`} />
@@ -102,10 +110,9 @@ const About = () => {
               <React.Fragment key={i}>
                 {/* LEFT column */}
                 <div className={[
-                    "md:col-start-1 md:self-center md:max-w-xl",
-                    isLeft ? "md:block md:justify-self-end" : "md:hidden",
-                  ].join(" ")}
-                >
+                  "md:col-start-1 md:self-center md:max-w-xl",
+                  isLeft ? "block md:block md:justify-self-end" : "hidden md:hidden",
+                ].join(" ")}>
                   <motion.div variants={item} className="relative md:pr-3">
                     <StepCard
                       index={i + 1}
@@ -127,10 +134,9 @@ const About = () => {
 
                 {/* RIGHT column */}
                 <div className={[
-                    "md:col-start-3 md:self-center md:max-w-xl",
-                    isLeft ? "md:hidden" : "md:block md:justify-self-start",
-                  ].join(" ")}
-                >
+                  "md:col-start-3 md:self-center md:max-w-xl",
+                  isLeft ? "hidden md:hidden" : "block md:block md:justify-self-start",
+                ].join(" ")}>
                   <motion.div variants={item} className="relative md:pl-3">
                     <StepCard
                       index={i + 1}
@@ -144,6 +150,7 @@ const About = () => {
               </React.Fragment>
             );
           })}
+
         </motion.ol>
       </section>
     </main>

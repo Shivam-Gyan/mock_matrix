@@ -11,7 +11,7 @@ import "ace-builds/src-noconflict/ext-language_tools";
 export default function CodeEditor({setCode,code}) {
    
     return (
-        <div className="w-full max-w-md z-30 h-72 border border-gray-300 rounded-md overflow-hidden">
+        <div className="w-full max-w-md z-30 h-76 border border-gray-300 rounded-md overflow-hidden">
             <AceEditor
                 mode="javascript"
                 theme="github_dark"

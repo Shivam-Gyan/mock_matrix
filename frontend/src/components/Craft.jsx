@@ -4,6 +4,7 @@ import ModalInstruction from './modal.instruction.jsx'
 import ModalProject from './Modal.Project.jsx';
 import { createData } from '../services/database.services.jsx';
 import { toast } from 'react-hot-toast';
+import { HashLink } from 'react-router-hash-link';
 
 const auth = true;
 
@@ -22,10 +23,18 @@ const Craft = () => {
         `
 // below code is testing purpose
 // Please replace with your actual data
+
+// smart mode
+{
+    "name":"string",
+    "email":"string",
+    "password":"string"
+}
+// basic mode
 {
     "name":"mock-matrix",
     "email":"mock-matrix@contact.com",
-    "password":"mock-matrix123"
+    "password":"mockmatrix123"
 }`);
 
     const handleGenerate = async () => {
@@ -35,7 +44,6 @@ const Craft = () => {
         }
 
         setLoading(true);
-        // await setProjectData({ ...projectData, json: JSON.parse(code), schema: JSON.parse(code) });
         try {
             let response;
             switch (projectData.projectType) {
@@ -145,7 +153,7 @@ const Craft = () => {
                 <div className="border border-gray-200 rounded-md p-4 hover:border-slate-400 transition">
                     <h3 className="text-lg font-semibold text-slate-800">2. Smart Mode</h3>
                     <p className="text-sm text-gray-600 mt-1">
-                        Upload your JSON <span className="font-semibold text-red-500">schema</span>
+                        Upload your JSON <span className="font-semibold text-red-500">schema </span>
                         and our AI will generate perfectly structured dummy JSON for you.
                         You’ll receive an API URL to fetch the AI-generated data.
                     </p>
@@ -174,71 +182,55 @@ const Craft = () => {
 
             {/* <CodeEditor/> */}
 
-            <section className="w-fit max-md:flex max-md:flex-col max-md:justify-center md:w-2xl p-4 mx-auto border-[1px] z-10 border-gray-200 shadow-xl bg-gray-100/70 backdrop-blur-3xl rounded-lg overflow-hidden">
-                <div>
-                    <span className="block text-slate-800 font-semibold mb-2">Project Type</span>
-                    <div className="flex gap-6">
-                        {/* AI Custom */}
-                        <label className="flex items-center gap-2 cursor-pointer group">
-                            <input
-                                type="checkbox"
-                                checked={projectData.projectType === "aicustom"}
-                                onChange={() => {
-                                    setGeneratedUrl("")
+            <div className="flex gap-4 justify-evenly mb-3 w-fit max-md:justify-center md:w-2xl p-4 mx-auto">
+                <button
+                    onClick={() => setProjectData((prev) => ({
+                        projectName: "",
+                        projectPassword: "",
+                        projectType: "aicustom",
+                    }))}
+                    className={
+                        (projectData.projectType === 'aicustom'
+                            ? 'bg-slate-800 text-white'
+                            : 'bg-gray-300') +
+                        ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
+                    }
+                >
+                    Smart Mode?
+                </button>
 
-                                    setProjectData((prev) => ({
-                                        projectName: "",
-                                        projectPassword: "",
-                                        projectType: "aicustom",
-                                    }));
-                                }}
-                                className="peer hidden"
-                            />
-                            <span className="w-3 h-3 flex items-center justify-center rounded-full border border-gray-400 bg-white peer-checked:bg-red-500 peer-checked:border-red-100 peer-checked:text-white transition-all duration-200">
-                                <svg
-                                    className="w-3 h-3 opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </span>
-                            <span className="text-sm text-gray-800 group-hover:text-slate-700 transition-colors">Smart Mode</span>
-                        </label>
+                <button
+                    onClick={() => setProjectData((prev) => ({
+                        projectName: "",
+                        projectPassword: "",
+                        projectType: "custom",
+                    }))}
+                    className={
+                        (projectData.projectType === 'custom'
+                            ? 'bg-slate-800 text-white'
+                            : 'bg-gray-300') +
+                        ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
+                    }
+                >
+                    Basic Mode?
+                </button>
 
-                        {/* Custom (Free) */}
-                        <label className="flex items-center gap-2 cursor-pointer group">
-                            <input
-                                type="checkbox"
-                                checked={projectData.projectType === "custom"}
-                                onChange={() => {
-                                    setGeneratedUrl("")
+                <HashLink
+                    smooth
+                    to="/#services"
+                    className={
+                        (projectData.projectType === 'plain'
+                            ? 'bg-slate-800 text-white'
+                            : 'bg-gray-300') +
+                        ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
+                    }
+                >
+                    Plain JSON?
+                </HashLink>
+            </div>
 
-                                    setProjectData((prev) => ({
-                                        projectName: "",
-                                        projectPassword: "",
-                                        projectType: "custom",
-                                    }));
-                                }}
-                                className="peer hidden"
-                            />
-                            <span className="w-3 h-3 flex items-center justify-center rounded-full border border-gray-400 bg-white peer-checked:bg-red-500 peer-checked:border-red-100 peer-checked:text-white transition-all duration-200">
-                                <svg
-                                    className="w-3 h-3 opacity-0 peer-checked:opacity-100 transition-opacity duration-150"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                                </svg>
-                            </span>
-                            <span className="text-sm text-gray-800 group-hover:text-slate-700 transition-colors">Basic Mode</span>
-                        </label>
-                    </div>
-                </div>
+            <section className="w-fit max-md:flex max-md:flex-col max-md:justify-center md:w-3xl p-4 mx-auto border-[1px] z-10 border-gray-200 shadow-xl shadow-slate-500 bg-gray-100/70 backdrop-blur-3xl rounded-lg overflow-hidden">
+                
 
                 <div className="flex max-md:flex-col gap-5 mt-4">
                     <CodeEditor setCode={setCode} code={code} />
@@ -286,23 +278,4 @@ const Craft = () => {
     )
 }
 
-export default Craft
-
-
-// <svg
-//     className="absolute inset-0 z-0 w-full h-full"
-//     viewBox="0 0 100 100"
-//     preserveAspectRatio="none"
-// >
-//     {/* Desktop / tablet elbow path */}
-//     <path
-//         className=""
-//         d="M0,60 H55 L70,45 H100" // moved from 70→60 and 55→45
-//         fill="none"
-//         stroke="#E5E7EB" // solid Tailwind gray-200
-//         //  stroke="#D1D5DB" // solid Tailwind gray-300
-//         strokeWidth="20"
-//         vectorEffect="non-scaling-stroke"
-//         strokeLinecap="round"
-//     />
-// </svg>
+export default Craft;
