@@ -120,7 +120,7 @@ npm start
 
 ### 1. Hero Section
 
-![Hero Section](./assets/screenshots/hero.png)
+![Hero Section](https://drive.google.com/file/d/1eYJPxId26SoRLOEn1MNhJs56gLoyIQLp/view?usp=sharing)
 
 ### 2. About Page
 
@@ -166,6 +166,6 @@ This project is licensed under the **ISC License** – see the LICENSE file for 
 
 * [Live Website](https://mock-matrix.vercel.app)
 * Author: **Shivam Gupta**
-* GitHub: [@](https://github.com/yourusername)
+* GitHub: [@Shivam-Gyan](https://github.com/Shivam-Gyan)
 
 
