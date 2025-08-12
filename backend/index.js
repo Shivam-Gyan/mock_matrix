@@ -17,9 +17,6 @@ import Authouter from './routes/user.route.js'
 const app = express();
 const PORT = process.env.PORT || 8000;
 
-// Connect to MongoDB right away
-connectDB();
-
 // Parse incoming JSON and URL-encoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -63,6 +60,11 @@ app.use('/api/v1', DummyRouter);
 app.use('/api/v1/json-auth', AuthRouter);
 app.use('/api/v1/projects', projectRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+const startServer = async () => {
+  await connectDB();
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+};
+
+startServer();

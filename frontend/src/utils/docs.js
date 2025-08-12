@@ -86,7 +86,7 @@ export const initialDocumentsData = [
                 name: "get all",
                 code: `
 // Fetch all users
-fetch('http://localhost:8000/api/v1/users')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/users')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -95,7 +95,7 @@ fetch('http://localhost:8000/api/v1/users')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/users?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/users?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -104,7 +104,7 @@ fetch('http://localhost:8000/api/v1/users?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/users?limit=5&fields=id,firstName,company')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/users?limit=5&fields=id,firstName,company')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -122,7 +122,7 @@ fetch('http://localhost:8000/api/v1/users?limit=5&fields=id,firstName,company')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/posts')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/posts')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -131,7 +131,7 @@ fetch('http://localhost:8000/api/v1/posts')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/posts?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/posts?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -140,7 +140,7 @@ fetch('http://localhost:8000/api/v1/posts?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/posts?limit=5&fields=id,title,body')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/posts?limit=5&fields=id,title,body')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -158,7 +158,7 @@ fetch('http://localhost:8000/api/v1/posts?limit=5&fields=id,title,body')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/comments')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/comments')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -167,7 +167,7 @@ fetch('http://localhost:8000/api/v1/comments')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/comments?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/comments?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -176,7 +176,7 @@ fetch('http://localhost:8000/api/v1/comments?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/comments?limit=5&fields=id,body,postId')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/comments?limit=5&fields=id,body,postId')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -194,7 +194,7 @@ fetch('http://localhost:8000/api/v1/comments?limit=5&fields=id,body,postId')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/todos')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/todos')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -203,7 +203,7 @@ fetch('http://localhost:8000/api/v1/todos')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/todos?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/todos?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -212,7 +212,7 @@ fetch('http://localhost:8000/api/v1/todos?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/todos?limit=5&fields=id,todo,completed')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/todos?limit=5&fields=id,todo,completed')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -230,7 +230,7 @@ fetch('http://localhost:8000/api/v1/todos?limit=5&fields=id,todo,completed')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/products')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/products')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -239,7 +239,7 @@ fetch('http://localhost:8000/api/v1/products')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/products?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/products?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -248,7 +248,7 @@ fetch('http://localhost:8000/api/v1/products?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/products?limit=5&fields=id,title,price')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/products?limit=5&fields=id,title,price')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -266,7 +266,7 @@ fetch('http://localhost:8000/api/v1/products?limit=5&fields=id,title,price')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/carts')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/carts')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -275,7 +275,7 @@ fetch('http://localhost:8000/api/v1/carts')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/carts?limit=3')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/carts?limit=3')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -284,7 +284,7 @@ fetch('http://localhost:8000/api/v1/carts?limit=3')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/carts?limit=3&fields=id,products,total')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/carts?limit=3&fields=id,products,total')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -302,7 +302,7 @@ fetch('http://localhost:8000/api/v1/carts?limit=3&fields=id,products,total')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/images')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/images')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -311,7 +311,7 @@ fetch('http://localhost:8000/api/v1/images')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/images?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/images?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -320,7 +320,7 @@ fetch('http://localhost:8000/api/v1/images?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/images?limit=5&fields=id,url,title')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/images?limit=5&fields=id,url,title')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -338,7 +338,7 @@ fetch('http://localhost:8000/api/v1/images?limit=5&fields=id,url,title')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/quotes')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/quotes')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -347,7 +347,7 @@ fetch('http://localhost:8000/api/v1/quotes')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/quotes?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/quotes?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -356,7 +356,7 @@ fetch('http://localhost:8000/api/v1/quotes?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/quotes?limit=5&fields=id,quote,author')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/quotes?limit=5&fields=id,quote,author')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -374,7 +374,7 @@ fetch('http://localhost:8000/api/v1/quotes?limit=5&fields=id,quote,author')
             {
                 name: "get all",
                 code: `
-fetch('http://localhost:8000/api/v1/recipes')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/recipes')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -383,7 +383,7 @@ fetch('http://localhost:8000/api/v1/recipes')
             {
                 name: "query - limit",
                 code: `
-fetch('http://localhost:8000/api/v1/recipes?limit=5')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/recipes?limit=5')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -392,7 +392,7 @@ fetch('http://localhost:8000/api/v1/recipes?limit=5')
             {
                 name: "query - limit and fields",
                 code: `
-fetch('http://localhost:8000/api/v1/recipes?limit=5&fields=id,title,ingredients')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/recipes?limit=5&fields=id,title,ingredients')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -410,7 +410,7 @@ fetch('http://localhost:8000/api/v1/recipes?limit=5&fields=id,title,ingredients'
             {
                 name: "GET 200 OK",
                 code: `
-fetch('http://localhost:8000/api/v1/http/200')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/http/200')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -419,7 +419,7 @@ fetch('http://localhost:8000/api/v1/http/200')
             {
                 name: "GET 404 Not Found",
                 code: `
-fetch('http://localhost:8000/api/v1/http/404')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/http/404')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -428,7 +428,7 @@ fetch('http://localhost:8000/api/v1/http/404')
             {
                 name: "GET 500 Internal Server Error",
                 code: `
-fetch('http://localhost:8000/api/v1/http/500')
+fetch('https://mock-matrix-backend.vercel.app/api/v1/http/500')
   .then(response => response.json())
   .then(data => console.log(data));
         `,
@@ -446,7 +446,7 @@ fetch('http://localhost:8000/api/v1/http/500')
             {
                 name: "Signup example",
                 code: `
-fetch('http://localhost:8000/api/v1/json-auth/register', {
+fetch('https://mock-matrix-backend.vercel.app/api/v1/json-auth/register', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -481,7 +481,7 @@ fetch('http://localhost:8000/api/v1/json-auth/register', {
                 name: "Login example",
                 code: `
 
-fetch('http://localhost:8000/api/v1/json-auth/login', {
+fetch('https://mock-matrix-backend.vercel.app/api/v1/json-auth/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -511,7 +511,7 @@ fetch('http://localhost:8000/api/v1/json-auth/login', {
             {
                 name: "Get Access Token Example",
                 code: `
-fetch('http://localhost:8000/api/v1/json-auth/get-access-token', {
+fetch('https://mock-matrix-backend.vercel.app/api/v1/json-auth/get-access-token', {
   method: 'POST',
   headers: { 'Authorization': 'Bearer <your_token>' },
   body: JSON.stringify({
@@ -529,7 +529,7 @@ fetch('http://localhost:8000/api/v1/json-auth/get-access-token', {
             {
                 name: "Get Profile Example",
                 code: `
-fetch('http://localhost:8000/api/v1/json-auth/get-profile', {
+fetch('https://mock-matrix-backend.vercel.app/api/v1/json-auth/get-profile', {
   method: 'GET',
   headers: { 'Authorization': 'Bearer <your_token>' },
 })
