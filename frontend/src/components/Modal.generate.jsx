@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import Loader from '../common/Loader.common';
 
-const ModalGenerateProject = ({ isOpen, onClose, setLoading, loading, generatedUrl, setProjectData, projectData, handleGenerate }) => {
+const ModalGenerateProject = ({ isOpen, onClose, setLoading,setGeneratedUrl, loading, generatedUrl, setProjectData, projectData, handleGenerate }) => {
 
     const [copied, setCopied] = useState(false);
 
@@ -59,6 +59,16 @@ const ModalGenerateProject = ({ isOpen, onClose, setLoading, loading, generatedU
 
                         <div className='mt-1 block w-full border border-gray-300 overflow-hidden rounded-md px-3 py-2 text-sm bg-gray-100'>
                             <div className='font-inconsolata text-slate-500'> {generatedUrl || <Loader size={50} />}</div>
+                            {generatedUrl && (
+                                <button
+                                    onClick={() => setGeneratedUrl("")}
+                                    className="mt-3 inline-flex items-center px-2 py-1 text-xs font-medium bg-slate-700/80 hover:bg-slate-300 rounded transition"
+                                    type="button"
+                                    title="Refresh"
+                                >
+                                    &#x21bb; Refresh
+                                </button>
+                            )}
                         </div>
                     {/* {generatedUrl && (
                     )} */}

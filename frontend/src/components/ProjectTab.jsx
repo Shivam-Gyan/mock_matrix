@@ -13,6 +13,7 @@ const ProjectTab = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [showSelectedProjectModal, setShowSelectedProjectModal] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
+    const [loading, setLoading] = useState(false);
 
 
     const [formData, setFormData] = useState({
@@ -28,10 +29,8 @@ const ProjectTab = () => {
     };
 
     const handleAddProject = async () => {
-        if (!formData.projectName.trim()) return;
-        if (!formData.projectPassword.trim()) return;
-        if (!formData.originIp.trim()) return;
-        if (!formData.projectType) return;
+        if (!formData.projectName.trim() || !formData.projectPassword.trim() || !formData.originIp.trim() || !formData.projectType) return;
+
         const project = {
             id: Date.now(),
             ...formData,
@@ -39,13 +38,15 @@ const ProjectTab = () => {
         };
 
         try {
+            setLoading(true);
             const data = await createProject(project);
-            // console.log(data.project);
             setProjects([data.project, ...projects]);
             setAllProjects([data.project, ...allProjects]);
         } catch (error) {
             console.error("Error creating project:", error);
+            toast.error("Failed to create project");
         } finally {
+            setLoading(false);
             setShowModal(false);
             setFormData({
                 projectName: "",
@@ -54,8 +55,9 @@ const ProjectTab = () => {
                 projectType: "custom",
             });
         }
-
     };
+
+
 
     const handleDelete = async (id) => {
         const deletedProject = projects.find((p) => p.projectId === id);
@@ -93,9 +95,9 @@ const ProjectTab = () => {
     const handleUpdateProject = async () => {
         if (!formData.projectId) return;
         try {
+            setLoading(true);
             const response = await updateProject(formData);
             if (response.project) {
-                // Update project in state
                 const updatedProjects = projects.map((p) =>
                     p.projectId === formData.projectId ? response.project : p
                 );
@@ -107,6 +109,7 @@ const ProjectTab = () => {
             console.error("Error updating project:", error);
             toast.error("Failed to update project");
         } finally {
+            setLoading(false);
             setShowModal(false);
             setFormData({
                 projectName: "",
@@ -175,7 +178,7 @@ const ProjectTab = () => {
                                     animate={{ opacity: 1 }}
                                     className="border-b border-gray-600 hover:bg-gray-600/50"
                                 >
-                                    <td className="p-2"><button onClick={() => {setSelectedProject(project); setShowSelectedProjectModal(true);} } className="hover:underline cursor-pointer">{project.projectName}</button></td>
+                                    <td className="p-2"><button onClick={() => { setSelectedProject(project); setShowSelectedProjectModal(true); }} className="hover:underline cursor-pointer">{project.projectName}</button></td>
                                     <td className="p-2">{project.projectType == "aicustom" ? "smart-mode" : "basic-mode"}</td>
                                     <td className="p-2">{project.originIp}</td>
                                     <td className="p-2">{new Date(project.createdAt).toLocaleDateString()}</td>
@@ -266,10 +269,39 @@ const ProjectTab = () => {
                                             handleAddProject();
                                         }
                                     }}
-                                    className="px-4 py-1 border-[1px] hover:scale-105 cursor-pointer border-gray-200 bg-gray-300/20 rounded-lg "
+                                    disabled={loading}
+                                    className={`px-4 py-1 border-[1px] hover:scale-105 cursor-pointer border-gray-200 bg-gray-300/20 rounded-lg flex items-center justify-center gap-2 ${loading ? "opacity-60 cursor-not-allowed" : ""
+                                        }`}
                                 >
-                                    Save
+                                    {loading ? (
+                                        <>
+                                            <svg
+                                                className="animate-spin h-4 w-4 text-white"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                fill="none"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <circle
+                                                    className="opacity-25"
+                                                    cx="12"
+                                                    cy="12"
+                                                    r="10"
+                                                    stroke="currentColor"
+                                                    strokeWidth="4"
+                                                ></circle>
+                                                <path
+                                                    className="opacity-75"
+                                                    fill="currentColor"
+                                                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                                ></path>
+                                            </svg>
+                                            Saving...
+                                        </>
+                                    ) : (
+                                        "Save"
+                                    )}
                                 </button>
+
 
                             </div>
                         </motion.div>

@@ -240,6 +240,7 @@ const Generate = ({ setActivetab }) => {
                 setProjectData={setProjectData}
                 projectData={projectData}
                 handleGenerate={handleGenerate}
+                setGeneratedUrl={setGeneratedUrl}
             />
 
             <section className="w-fit mt-12 max-md:flex max-md:flex-col max-md:justify-center md:w-3xl p-4 mx-auto border-[1px] z-10 border-gray-500  bg-gray-600/20  rounded-lg overflow-hidden">
