@@ -92,7 +92,7 @@ Perfect for quick prototyping without worrying about creating mock data manually
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/mock-matrix.git
+git clone https://github.com/Shivam-Gyan/mock-matrix.git
 cd mock-matrix
 ```
 
@@ -120,52 +120,40 @@ npm start
 
 ### 1. Hero Section
 
-![Hero Section](https://drive.google.com/file/d/1eYJPxId26SoRLOEn1MNhJs56gLoyIQLp/view?usp=sharing)
+![Hero Section](https://drive.google.com/uc?export=view&id=1eYJPxId26SoRLOEn1MNhJs56gLoyIQLp)
 
-### 2. About Page
+### 2. Generate JSON
 
-![About Page](./assets/screenshots/about.png)
+![Generate JSON](https://drive.google.com/uc?export=view&id=1Q2jH0jDJOiT67KdTZtPH58TClJGlDpqR)
 
-### 3. Generate JSON
+### 3. Services
 
-![Generate JSON](./assets/screenshots/generate-json.png)
+![Services](https://drive.google.com/uc?export=view&id=1jBz5fInnbpSF0CKfL_iUy_4Kj_xS8Z1_)
 
-### 4. Services
 
-![Services](./assets/screenshots/services.png)
+### 4. Contact Us
 
-### 5. Contact Us
+![Contact Us](https://drive.google.com/uc?export=view&id=12b6_0oSjRCtSSo8oSGuCazakHNQP3_Yx)
 
-![Contact Us](./assets/screenshots/contact-us.png)
 
-### 6. Dashboard
+### 5. Project Management
 
-![Dashboard](./assets/screenshots/dashboard.png)
+![Project Management](https://drive.google.com/uc?export=view&id=1jJ7zm_xEQ2VXg5QG0kIm3IogkIEwS4j1)
 
-### 7. Project Management
+### 6. Account Info
 
-![Project Management](./assets/screenshots/project-management.png)
+![Account Info](https://drive.google.com/uc?export=view&id=13ItEDDvg79T9a__-sRgs0hfew5Se3GBq)
 
-### 8. Account Info
+### 7. Insights
 
-![Account Info](./assets/screenshots/account-info.png)
+![Insights](https://drive.google.com/uc?export=view&id=1k2t8ZN05630JNQ78Dni3vClgiDYrxgd8)
 
-### 9. Insights
-
-![Insights](./assets/screenshots/insights.png)
-
----
-
-## 📄 License
-
-This project is licensed under the **ISC License** – see the LICENSE file for details.
-
----
 
 ## 💌 Connect
 
 * [Live Website](https://mock-matrix.vercel.app)
 * Author: **Shivam Gupta**
 * GitHub: [@Shivam-Gyan](https://github.com/Shivam-Gyan)
+* Linkedin: [@shivam-gupta19](https://www.linkedin.com/in/shivam-gupta19)
 
 
