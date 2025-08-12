@@ -183,6 +183,75 @@ const jsonController = {
             res.status(500).json({ message: "Internal Server Error" });
         }
     },
+    // This controller handles boardings api requests
+    getBoardingsJson: async (req, res) => {
+        try {
+            let cursor = getCollection('boardings').find({});
+            cursor = applyQueryOptions(req, cursor);
+
+            const docs = await cursor.toArray();
+            res.status(200).json({
+                success: true,
+                limit: docs.length,
+                boardings: docs
+            });
+        } catch (error) {
+            console.error(`❌ Error fetching boardings JSON: ${error.message}`);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+    // This controller handles leaderboards api requests
+    getLeaderboardJson: async (req, res) => {
+        try {
+            let cursor = getCollection('leaderboards').find({});
+            cursor = applyQueryOptions(req, cursor);
+
+            const docs = await cursor.toArray();
+            res.status(200).json({
+                success: true,
+                limit: docs.length,
+                Leaderboards: docs
+            });
+        } catch (error) {
+            console.error(`❌ Error fetching boardings JSON: ${error.message}`);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+    // This controller handles job lists api requests
+    getJoblistsJson: async (req, res) => {
+        try {
+            let cursor = getCollection('joblists').find({});
+            cursor = applyQueryOptions(req, cursor);
+
+            const docs = await cursor.toArray();
+            res.status(200).json({
+                success: true,
+                limit: docs.length,
+                joblists: docs
+            });
+        } catch (error) {
+            console.error(`❌ Error fetching boardings JSON: ${error.message}`);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
+    // This controller handles FAQs api requests
+    getFaqsJson: async (req, res) => {
+        try {
+            let cursor = getCollection('faqs').find({});
+            cursor = applyQueryOptions(req, cursor);
+
+            const docs = await cursor.toArray();
+            res.status(200).json({
+                success: true,
+                limit: docs.length,
+                Faqs: docs
+            });
+        } catch (error) {
+            console.error(`❌ Error fetching boardings JSON: ${error.message}`);
+            res.status(500).json({ message: "Internal Server Error" });
+        }
+    },
 
     // This controller handles images api requests
     getImagesJson: async (req, res) => {

@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
         trim: true,
         minlength: 3
     },
@@ -27,10 +26,14 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-    password: {
+    // password: {
+    //     type: String,
+    //     required: true,
+    //     minlength: 6
+    // },
+    picture: {
         type: String,
-        required: true,
-        minlength: 6
+        required: true
     },
     // This is the limit of projects a user can create
     // if project is aicustom then limit is 5 otherwise unlimited

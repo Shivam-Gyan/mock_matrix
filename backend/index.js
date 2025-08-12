@@ -2,62 +2,67 @@ import express from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 
-// importing the MongoDB connection configuration
-// This will ensure that the database connection is established when the server starts
 import connectDB from './config/mongodb.config.js';
 import cookieParser from 'cookie-parser';
-
-// Creating an instance of express application
-// This will allow us to define routes and middleware for our application
-const app = express();
-
-// Defining the port from environment variables
-// This allows us to easily change the port without modifying the code
-const PORT = process.env.PORT || 8000;
-
-// cors middleware
 import cors from 'cors';
-app.use(cors({
-    origin: '*', // Allow all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow specific headers
-    credentials: true // Allow credentials (cookies, authorization headers, etc.)
-}));
+// import session from 'express-session';
+// import passport from './config/passport.config.js';
 
-
-// Middleware
-// express.json() is used to parse incoming JSON requests
-app.use(express.json());
-
-// express.urlencoded() is used to parse incoming requests with urlencoded payloads
-// This is useful for form submissions and other URL-encoded data
-app.use(express.urlencoded({ extended: true }));
-
-// cookieParser() is used to parse cookies from the request headers
-app.use(cookieParser());
-
-
-// Routes
-app.get('/', (req, res) => {
-    res.send('Hello, world!');
-});
-
-// dynamic routes features 
+// Import routers
 import DummyRouter from './routes/json.route.js';
 import AuthRouter from './routes/auth.json.routes.js';
 import projectRouter from './routes/project.route.js';
+import Authouter from './routes/user.route.js'
+
+const app = express();
+const PORT = process.env.PORT || 8000;
+
+// Connect to MongoDB right away
+connectDB();
+
+// Parse incoming JSON and URL-encoded data
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Parse cookies
+app.use(cookieParser());
+
+// Session middleware
+// app.use(session({
+//   secret: process.env.SESSION_SECRET || 'YOUR_SECRET',
+//   resave: false,
+//   saveUninitialized: true,
+//   cookie: {
+//     secure: false, // set to true if using HTTPS
+//     httpOnly: true,
+//     maxAge: 24 * 60 * 60 * 1000 // 1 day
+//   }
+// }));
+
+// Passport middleware
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 
-// Using the DummyRouter for handling JSON responses
+// CORS middleware
+app.use(cors({
+  origin: '*', // You can restrict this to your frontend URL in production
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
+}));
+
+// Basic route
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+// API routes
+app.use('/api/v1/auth', Authouter);
 app.use('/api/v1', DummyRouter);
-app.use('/api/v1/auth', AuthRouter);
+app.use('/api/v1/json-auth', AuthRouter);
 app.use('/api/v1/projects', projectRouter);
 
-
-// Start server
 app.listen(PORT, () => {
-    // calling the connectDB function to establish a connection to MongoDB
-    connectDB();
-    // This will log the server running message
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

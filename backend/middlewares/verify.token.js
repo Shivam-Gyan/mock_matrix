@@ -32,4 +32,16 @@ function verifyRefreshToken(req, res, next) {
     });
 }
 
-export { verifyAccessToken, verifyRefreshToken };
+// authenticated user token verification
+function verifyUser(req, res, next) {
+    const token = req.headers['authorization']?.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'User not authenticated' });
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.status(403).json({ message: 'Invalid access token' });
+        req.user = user;
+        next();
+    });
+}
+
+export { verifyAccessToken, verifyRefreshToken, verifyUser };

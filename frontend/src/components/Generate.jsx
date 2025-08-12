@@ -1,30 +1,20 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "../context/context";
 import CodeEditor from './Code.block.jsx'
 import ModalInstruction from './modal.instruction.jsx'
+import ModalGenerateProject from './Modal.generate.jsx'
 import { createData } from '../services/database.services.jsx';
 import { toast } from 'react-hot-toast';
-import { HashLink } from 'react-router-hash-link';
-import { useAuth } from '../context/context.jsx';
-import ModalGenerateProject from './Modal.generate.jsx';
-import { Link } from 'react-router-dom';
 
-// const auth = true;
-
-const Craft = () => {
-    const { projects, user: auth } = useAuth();
+const Generate = ({ setActivetab }) => {
+    const { projects,user:auth } = useAuth();
     const [selectedProject, setSelectedProject] = useState('');
     const [generatedUrl, setGeneratedUrl] = useState('');
     const [loading, setLoading] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const [showGenerateModal, setShowGenerateModal] = useState(false);
     const [showProjectModal, setShowProjectModal] = useState(false);
-    const [projectData, setProjectData] = useState({
-        projectName: "",
-        projectPassword: "",
-        originIp: "",
-        projectType: "custom",
-        projectId: ""
-    });
     const [code, setCode] = useState(
         `
 // below code is testing purpose
@@ -42,6 +32,37 @@ const Craft = () => {
     "email":"mock-matrix@contact.com",
     "password":"mockmatrix123"
 }`);
+
+
+    const [projectData, setProjectData] = useState({
+        projectName: "",
+        projectPassword: "",
+        originIp: "",
+        projectType: "custom",
+        projectId: ""
+    });
+
+
+
+    const handleProjectChange = (e) => {
+        // set selected projects
+        setSelectedProject(e.target.value);
+
+        // find project from projects
+        const project = projects.find((proj) => proj.projectId === e.target.value);
+
+        // set project data
+        setProjectData({
+            projectName: project.projectName,
+            projectPassword: project.projectPassword,
+            originIp: project.originIp,
+            projectType: project.projectType,
+            projectId: project.projectId
+        });
+
+    };
+
+
 
     const handleGenerate = async () => {
         if (!code) {
@@ -78,41 +99,58 @@ const Craft = () => {
         }
     };
 
-    const handleProjectChange = (e) => {
-        // set selected projects
-        setSelectedProject(e.target.value);
-
-        // find project from projects
-        const project = projects.find((proj) => proj.projectId === e.target.value);
-
-        // set project data
-        setProjectData({
-            projectName: project.projectName,
-            projectPassword: project.projectPassword,
-            originIp: project.originIp,
-            projectType: project.projectType,
-            projectId: project.projectId
-        });
-
-    };
-
     return (
-        // <section className="relative  h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
-        <main id="generate" className="min-h-screen mb-10">
-            <section className="mx-auto max-w-6xl px-6 sm:px-8 pt-12 pb-8">
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-nunito tracking-tight text-slate-700">
-                    Generate <span className="text-slate-500">JSON</span> <i className='fi fi-br-bracket-curly text-4xl' /> <i className='fi fi-br-bracket-curly-right text-4xl' />
-                </h1>
-                <p className="mt-4 max-w-2xl font-inconsolata text-gray-500">
-                    Generate a live data URL in seconds. Simply provide your JSON schema, and Mock Matrix will instantly give you a URL with your schema and perfectly structured dummy JSON, ready for testing and development.
-                </p>
-                <div className=" z-30 flex w-fit items-center mt-4 gap-2 bg-gray-100/70 backdrop-blur-3xl p-3 rounded-lg border-[1px] border-gray-200">
-                    <span className="w-2 h-2  rounded-full bg-red-500"></span>
-                    <p className="font-inconsolata text-sm">Build JSON, share in seconds</p>
-                </div>
-            </section>
+        <div className="ml-1 md:ml-10 mt-12  flex flex-col gap-6 text-white">
+            {/* Header with three sections */}
+            <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex max-md:flex-col max-md:items-start gap-4 items-center justify-between"
+            >
+                {/* Left: Name */}
+                <h2 className=" text-2xl font-bold">Generate</h2>
 
-            {/*format of json modal instruction */}
+                {/* Middle: Dropdown */}
+
+                <select
+                    value={selectedProject}
+                    onChange={handleProjectChange}
+                    disabled={projects.length === 0}
+                    className="px-3 py-2 font-nunito max-md:hidden w-64 rounded-lg bg-gray-700 border border-gray-300"
+                >
+                    <option value="">{projects.length ===0 ? "No projects" : "Select a project"}</option>
+                    {projects.map((proj) => (
+                         <option key={proj.projectId} value={proj.projectId}>
+                             {proj.projectName} {" "} {proj.projectType === "custom" ? "(Basic Mode)" : "(Smart Mode)"}
+                         </option>
+                     ))}
+                </select>
+                <div className="flex justify-between gap-2 max-md:w-full">
+                    <select
+                        value={selectedProject}
+                        onChange={(e) => handleProjectChange(e.target.value)}
+                        className="px-3 py-2 w-fit md:hidden rounded-lg bg-gray-700 border border-gray-300"
+                    >
+                        <option value="">Select a project</option>
+                        {projects.map((proj) => (
+                            <option key={proj.projectId} value={proj.projectId}>
+                                {proj.projectName}
+                            </option>
+                        ))}
+                    </select>
+
+                    {/* Right: Create Project Button */}
+                    <button
+                        onClick={() => setActivetab('Projects')}
+                        className="flex items-center gap-2 bg-gray-400/20 border border-gray-300 px-4 py-1 rounded-lg font-semibold"
+                    >
+                        <span className="text-lg font-bold">+</span> Create Project
+                    </button>
+                </div>
+            </motion.div>
+
+            {/* ______________________________________________________________________  bottom content ______________________________________________________________ */}
+
             <ModalInstruction isOpen={showModal}
                 onClose={() => setShowModal(false)}
                 title="Smart Mode JSON Schema Guide"
@@ -204,44 +242,7 @@ const Craft = () => {
                 handleGenerate={handleGenerate}
             />
 
-            {/* <CodeEditor/> */}
-
-            <div className="flex gap-4 justify-evenly mb-3 w-fit max-md:justify-center md:w-2xl p-4 mx-auto">
-                <select
-                    value={selectedProject}
-                    onChange={handleProjectChange}
-                    disabled={projects.length === 0}
-                    className="px-3 py-2 font-nunito max-md:hidden w-64 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-slate-500 transition-colors"
-                >
-                    <option className='' value="">{projects.length === 0 ? "No projects" : "Select a project"}</option>
-                    {projects.map((proj) => (
-                        <option key={proj.projectId} value={proj.projectId}>
-                            {proj.projectName} {" "} {proj.projectType === "custom" ? "(Basic Mode)" : "(Smart Mode)"}
-                        </option>
-                    ))}
-                </select>
-
-                <Link to={'/dashboard'}
-                    className="flex items-center gap-2 bg-gray-100 border border-gray-300 px-4 py-1 rounded-lg font-semibold"
-                >
-                    <span className="text-lg font-bold">+</span> Create New Project
-                </Link>
-
-                <HashLink
-                    smooth
-                    to="/#services"
-                    className={
-                        (projectData.projectType === 'plain'
-                            ? 'bg-slate-800 text-white'
-                            : 'bg-gray-100') +
-                        ' px-4 py-2 mt-1 border border-gray-300 rounded-lg text-sm nunito-600 hover:shadow-md'
-                    }
-                >
-                    Plain JSON?
-                </HashLink>
-            </div>
-
-            <section className="w-fit max-md:flex max-md:flex-col max-md:justify-center md:w-3xl p-4 mx-auto border-[1px] z-10 border-gray-200 shadow-xl shadow-slate-500 bg-gray-100/70 backdrop-blur-3xl rounded-lg overflow-hidden">
+            <section className="w-fit mt-12 max-md:flex max-md:flex-col max-md:justify-center md:w-3xl p-4 mx-auto border-[1px] z-10 border-gray-500  bg-gray-600/20  rounded-lg overflow-hidden">
 
 
                 <div className="flex max-md:flex-col gap-5 mt-4">
@@ -249,12 +250,12 @@ const Craft = () => {
                     <div className="flex max-md:gap-5 flex-col justify-around">
                         <div>
                             <h1 className="nunito-600 text-lg">Quick Guide</h1>
-                            <p className="nunito-400 text-sm text-gray-600">
+                            <p className="nunito-400 text-sm text-gray-300">
                                 Get a quick introduction about our schema format and data entries.
                             </p>
                             <button
                                 onClick={() => setShowModal(true)}
-                                className="bg-slate-700 hover:bg-slate-800 text-white text-sm font-nunito mt-4 px-3 py-1 rounded-md transition-colors"
+                                className="bg-slate-800 hover:bg-slate-700 text-white text-sm font-nunito mt-4 px-3 py-1 rounded-md transition-colors"
                             >
                                 Learn More
                             </button>
@@ -262,7 +263,7 @@ const Craft = () => {
 
                         <div>
                             <h1 className="nunito-600 text-lg">Generate JSON</h1>
-                            <p className="nunito-400 text-sm text-gray-600">
+                            <p className="nunito-400 text-sm text-gray-300">
                                 Quickly generate JSON data based on your schema.
                             </p>
                             <button
@@ -277,7 +278,7 @@ const Craft = () => {
                                     }
                                     setShowProjectModal(true);
                                 }}
-                                className="bg-slate-700 hover:bg-slate-800 text-white text-sm font-nunito mt-4 px-3 py-1 rounded-md transition-colors"
+                                className="bg-slate-800 hover:bg-slate-700 text-white text-sm font-nunito mt-4 px-3 py-1 rounded-md transition-colors"
                             >
                                 Generate
                             </button>
@@ -285,9 +286,8 @@ const Craft = () => {
                     </div>
                 </div>
             </section>
+        </div>
+    );
+};
 
-        </main>
-    )
-}
-
-export default Craft;
+export default Generate;

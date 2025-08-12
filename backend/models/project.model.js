@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const projectSchema = new mongoose.Schema({
     userObjectId:{
         type: mongoose.Schema.Types.ObjectId,
@@ -32,15 +33,24 @@ const projectSchema = new mongoose.Schema({
     },
     projectUrl: {
         type: String,
-        required: true,
+        // required: true,
         unique: true,
         trim: true
     },
     JsonFile:{
         type: String,
-        required: true,
+        // required: true,
         trim: true
-    }
+    },
+    originIp: {
+        type: String,
+        required: true,
+        trim: true,
+        default: '0.0.0.0'
+    },
+    request:[{
+        type: String,
+    }]
 
 }, {
     timestamps: true

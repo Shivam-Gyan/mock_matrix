@@ -1,21 +1,40 @@
 import { useState } from "react";
+import {toast} from 'react-hot-toast'
+import { createContact } from "../services/database.services";
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         message: "",
-        type: 'feedback',
+        contactType: 'feedback',
     });
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form submitted:", formData);
-        // send logic here...
+        // Validate form data
+        if (!formData.name || !formData.email || !formData.message) {
+            toast.error("Please fill in all fields.");
+            return;
+        }
+
+        try {
+            const response = await createContact(formData);
+            toast.success(response.message);
+        } catch (error) {
+            toast.error(`${formData.contactType} submission failed`);
+        } finally {
+            setFormData({
+                name: "",
+                email: "",
+                message: "",
+                contactType: 'feedback',
+            });
+        }
     };
 
     return (
@@ -41,9 +60,9 @@ const ContactUs = () => {
                 {/* type selection */}
                 <div className="flex gap-4 justify-evenly mb-3">
                     <button
-                        onClick={() => setFormData({ ...formData, type: 'question' })}
+                        onClick={() => setFormData({ ...formData, contactType: 'question' })}
                         className={
-                            (formData.type === 'question'
+                            (formData.contactType === 'question'
                                 ? 'bg-slate-800 text-white'
                                 : 'bg-gray-300') +
                             ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
@@ -53,9 +72,9 @@ const ContactUs = () => {
                     </button>
 
                     <button
-                        onClick={() => setFormData({ ...formData, type: 'feedback' })}
+                        onClick={() => setFormData({ ...formData, contactType: 'feedback' })}
                         className={
-                            (formData.type === 'feedback'
+                            (formData.contactType === 'feedback'
                                 ? 'bg-slate-800 text-white'
                                 : 'bg-gray-300') +
                             ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
@@ -65,9 +84,9 @@ const ContactUs = () => {
                     </button>
 
                     <button
-                        onClick={() => setFormData({ ...formData, type: 'collab' })}
+                        onClick={() => setFormData({ ...formData, contactType: 'collab' })}
                         className={
-                            (formData.type === 'collab'
+                            (formData.contactType === 'collab'
                                 ? 'bg-slate-800 text-white'
                                 : 'bg-gray-300') +
                             ' px-4 py-2 rounded-lg text-sm nunito-600 hover:shadow-md'
@@ -78,7 +97,7 @@ const ContactUs = () => {
                 </div>
 
                 {/* Right side - Form */}
-                <div className="p-5 shadow-xl shadow-slate-400 bg-gray-200/70 rounded-lg border-[1px] border-gray-200 backdrop-blur-lg">
+                <div className="p-5 mx-6 shadow-xl shadow-slate-400 bg-gray-200/70 rounded-lg border-[1px] border-gray-200 backdrop-blur-lg">
                     <form onSubmit={handleSubmit} className="space-y-3">
                         <div>
                             <label className="block text-gray-700 font-medium">Name</label>

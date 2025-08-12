@@ -1,4 +1,5 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { toast } from "react-hot-toast";
 const Services = () => {
     const jsonServices = [
         "products",
@@ -11,10 +12,10 @@ const Services = () => {
         "recipes",
         "auth",
         "http",
-        "boarding pass",
-        "leader board",
-        "job list",
-        "faq"
+        "boardings",
+        "leaderboards",
+        "joblists",
+        "faqs"
     ];
 
     return (
@@ -43,16 +44,31 @@ const Services = () => {
 
                 {/* Service List */}
                 <div className="mt-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    {jsonServices.map((service, index) => (
-                        <Link
-                            key={index}
-                            target="_blank"
-                            to={`${import.meta.env.VITE_API_BASE_URL}/${service=="http" ? "http/200" : service}`}
-                            className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800 transition-colors"
-                        >
-                            <p className="text-slate-200 font-semibold">{service}/</p>
-                        </Link>
-                    ))}
+                    {jsonServices.map((service, index) => {
+                        if (service === "auth") {
+                            return(<button
+                                    onClick={()=> toast.error('please follow docs for auth')}
+                                    key={index}
+                                    // to={`${import.meta.env.VITE_API_BASE_URL}/${service == "http" ? "http/200" : service}`}
+                                    className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800 transition-colors"
+                                >
+                                    <p className="text-slate-200 font-semibold">{service}/</p>
+                                </button>)
+
+                        }
+                        else {
+                            return (
+                                <Link
+                                    key={index}
+                                    target="_blank"
+                                    to={`${import.meta.env.VITE_API_BASE_URL}/${service == "http" ? "http/200" : service}`}
+                                    className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 text-center hover:bg-slate-800 transition-colors"
+                                >
+                                    <p className="text-slate-200 font-semibold">{service}/</p>
+                                </Link>
+                            )
+                        }
+                    })}
                 </div>
             </section>
         </main>

@@ -1,6 +1,11 @@
 import React from "react";
 import herosection3 from "../assets/herosection3.png";
 import { motion } from "framer-motion";
+import { useAuth } from "../context/context";
+import { HashLink } from "react-router-hash-link";
+import { Link } from "react-router-dom";
+import { useGoogleLogin } from "@react-oauth/google";
+import { googleAuthApi } from "../services/database.services";
 
 const image = [
   "https://tse1.mm.bing.net/th/id/OIP.V-iUPXL7-oSOAvR2dtdWiQHaHa?pid=Api&P=0&h=180",
@@ -11,6 +16,35 @@ const image = [
 
 const Herosection = () => {
 
+  const { user: auth, setUser, setProjects } = useAuth();
+
+  const responseGoogle = async (googlecode) => {
+    try {
+      if (googlecode['code']) {
+        // Handle successful login
+        const response = await googleAuthApi(googlecode['code']);
+        if (response.user) {
+          localStorage.setItem("token", response.token);
+          setUser(response.user);
+          setProjects(response.projects);
+          toast.success("Google Auth Successful");
+        }
+      } else {
+        toast.error("Google Auth Failed");
+      }
+    } catch (err) {
+      toast.error(err.message);
+      console.error("Google Auth Error:", err);
+    }
+  }
+
+
+  // google auth
+  const googleAuth = useGoogleLogin({
+    onSuccess: responseGoogle,
+    onError: responseGoogle,
+    flow: 'auth-code',
+  });
 
   return (
     <div className="relative lg:h-[calc(100vh-4rem)]  min-h-[calc(100vh-4rem)] overflow-hidden max-sm:px-5 px-16 py-10">
@@ -61,15 +95,18 @@ const Herosection = () => {
         <p className="text-5xl nunito-400 mb-4 z-30 tracking-normal uppercase">Imagine. <span className="text-slate-800">Create.</span></p>
         <p className="text-5xl nunito-400 tracking-normal uppercase">Transcend</p>
         <div className="flex items-center mt-5 gap-5">
-          <button onClick={() => { console.log("get started") }} className="bg-slate-800 text-white font-nunito text-sm px-3 py-2 cursor-pointer hover:bg-slate-600 rounded-md ">Get Started</button>
-          <button onClick={() => { console.log("view documentation") }} className=" text-gray-600 font-nunito text-md hover:border-b-2 hover:border-gray-600 ml-4 pt-1 transition duration-200 cursor-pointer">Documentation</button>
+          {
+            auth ? <HashLink smooth to="/#generate" className="bg-slate-800 text-white font-nunito text-sm px-3 py-2 cursor-pointer hover:bg-slate-600 rounded-md ">Explore</HashLink> :
+              <button onClick={googleAuth} className="bg-slate-800 text-white font-nunito text-sm px-3 py-2 cursor-pointer hover:bg-slate-600 rounded-md ">Get Started</button>
+          }
+          <Link to="/docs" className=" text-gray-600 font-nunito text-md hover:border-b-2 hover:border-gray-600 ml-4 pt-1 transition duration-200 cursor-pointer">Documentation</Link>
         </div>
       </div>
 
-          {/* this section i am talking about */}
+      {/* this section i am talking about */}
       <section className="relative flex mt-24 p-10 z-30 ml-0 mb-10 md:ml-16 flex-col lg:flex-row-reverse justify-between w-4xl ">
         <div className=" flex gap-5 backdrop-blur-2xl w-fit max-lg:mb-5 items-start">
-        {/* <div className="absolute z-30 top-3/4 right-10  md:right-1/3 flex gap-5 items-start"> */}
+          {/* <div className="absolute z-30 top-3/4 right-10  md:right-1/3 flex gap-5 items-start"> */}
           <motion.div animate={{ rotate: 360 }}
             transition={{
               repeat: Infinity,

@@ -11,10 +11,10 @@
 }
 
 .nav-link-text {
-    @apply text-sm text-gray-400 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
+    @apply text-sm text-gray-700 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
 }
 .nav-link-text-md {
-    @apply text-base text-gray-400 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
+    @apply text-base text-gray-700 transition duration-200 border-b-2 border-transparent hover:border-slate-700;
 }
 
 
