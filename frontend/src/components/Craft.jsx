@@ -29,14 +29,16 @@ const Craft = () => {
         `
 // below code is testing purpose
 // Please replace with your actual data
+// don't add any comments 
+// just plain schema/ plain json
 
-// smart mode
+// this object for smart mode
 {
     "name":"string",
     "email":"string",
     "password":"string"
 }
-// basic mode
+// this object for basic 
 {
     "name":"mock-matrix",
     "email":"mock-matrix@contact.com",

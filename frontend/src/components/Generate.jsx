@@ -8,7 +8,7 @@ import { createData } from '../services/database.services.jsx';
 import { toast } from 'react-hot-toast';
 
 const Generate = ({ setActivetab }) => {
-    const { projects,user:auth } = useAuth();
+    const { projects, user: auth } = useAuth();
     const [selectedProject, setSelectedProject] = useState('');
     const [generatedUrl, setGeneratedUrl] = useState('');
     const [loading, setLoading] = useState(false);
@@ -19,14 +19,16 @@ const Generate = ({ setActivetab }) => {
         `
 // below code is testing purpose
 // Please replace with your actual data
+// don't add any comments 
+// just plain schema/ plain json
 
-// smart mode
+// this object for smart mode
 {
     "name":"string",
     "email":"string",
     "password":"string"
 }
-// basic mode
+// this object for basic 
 {
     "name":"mock-matrix",
     "email":"mock-matrix@contact.com",
@@ -118,23 +120,24 @@ const Generate = ({ setActivetab }) => {
                     disabled={projects.length === 0}
                     className="px-3 py-2 font-nunito max-md:hidden w-64 rounded-lg bg-gray-700 border border-gray-300"
                 >
-                    <option value="">{projects.length ===0 ? "No projects" : "Select a project"}</option>
+                    <option value="">{projects.length === 0 ? "No projects" : "Select a project"}</option>
                     {projects.map((proj) => (
-                         <option key={proj.projectId} value={proj.projectId}>
-                             {proj.projectName} {" "} {proj.projectType === "custom" ? "(Basic Mode)" : "(Smart Mode)"}
-                         </option>
-                     ))}
+                        <option key={proj.projectId} value={proj.projectId}>
+                            {proj.projectName} {" "} {proj.projectType === "custom" ? "(Basic Mode)" : "(Smart Mode)"}
+                        </option>
+                    ))}
                 </select>
                 <div className="flex justify-between gap-2 max-md:w-full">
                     <select
                         value={selectedProject}
-                        onChange={(e) => handleProjectChange(e.target.value)}
-                        className="px-3 py-2 w-fit md:hidden rounded-lg bg-gray-700 border border-gray-300"
+                        onChange={handleProjectChange}
+                        disabled={projects.length === 0}
+                        className="px-3 py-2 font-nunito md:hidden w-64 rounded-lg bg-gray-700 border border-gray-300"
                     >
-                        <option value="">Select a project</option>
+                        <option value="">{projects.length === 0 ? "No projects" : "Select a project"}</option>
                         {projects.map((proj) => (
                             <option key={proj.projectId} value={proj.projectId}>
-                                {proj.projectName}
+                                {proj.projectName} {" "} {proj.projectType === "custom" ? "(Basic)" : "(Smart)"}
                             </option>
                         ))}
                     </select>
