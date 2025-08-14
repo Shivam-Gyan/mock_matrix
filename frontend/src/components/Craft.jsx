@@ -6,12 +6,13 @@ import { toast } from 'react-hot-toast';
 import { HashLink } from 'react-router-hash-link';
 import { useAuth } from '../context/context.jsx';
 import ModalGenerateProject from './Modal.generate.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // const auth = true;
 
 const Craft = () => {
     const { projects, user: auth } = useAuth();
+    const navigate = useNavigate();
     const [selectedProject, setSelectedProject] = useState('');
     const [generatedUrl, setGeneratedUrl] = useState('');
     const [loading, setLoading] = useState(false);
@@ -96,6 +97,15 @@ const Craft = () => {
             projectId: project.projectId
         });
 
+    };
+
+    const handleNavigateToDashboard = () => {
+        // Navigate to the dashboard
+        if(auth){
+            navigate('/dashboard');
+        }else{
+            toast.error('Please login to access the dashboard');
+        }
     };
 
     return (
@@ -223,11 +233,11 @@ const Craft = () => {
                     ))}
                 </select>
 
-                <Link to={'/dashboard'}
+                <button onClick={handleNavigateToDashboard}
                     className="flex items-center gap-2 bg-gray-100 border border-gray-300 px-4 py-1 rounded-lg font-semibold"
                 >
                     <span className="text-lg font-bold">+</span> Create New Project
-                </Link>
+                </button>
 
                 <HashLink
                     smooth

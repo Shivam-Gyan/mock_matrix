@@ -4,6 +4,7 @@ import { createProject, deleteProject, updateProject } from "../services/databas
 import { useAuth } from "../context/context";
 import { toast } from "react-hot-toast";
 import ModalProject from "./Modal.Project";
+import Loader from "../common/Loader.common";
 
 const ProjectTab = () => {
 
@@ -14,7 +15,7 @@ const ProjectTab = () => {
     const [showSelectedProjectModal, setShowSelectedProjectModal] = useState(false);
     const [selectedProject, setSelectedProject] = useState(null);
     const [loading, setLoading] = useState(false);
-
+    const [deletingId, setDeletingId] = useState(null); // ✅ Track which project is deleting
 
     const [formData, setFormData] = useState({
         projectId: "",
@@ -29,7 +30,10 @@ const ProjectTab = () => {
     };
 
     const handleAddProject = async () => {
-        if (!formData.projectName.trim() || !formData.projectPassword.trim() || !formData.originIp.trim() || !formData.projectType) return;
+        if (!formData.projectName.trim() || !formData.projectPassword.trim() || !formData.originIp.trim() || !formData.projectType) {
+            toast.error("Please fill in all fields");
+            return;
+        }
 
         const project = {
             id: Date.now(),
@@ -57,12 +61,10 @@ const ProjectTab = () => {
         }
     };
 
-
-
     const handleDelete = async (id) => {
         const deletedProject = projects.find((p) => p.projectId === id);
         if (!deletedProject) return;
-
+        setDeletingId(id); // ✅ Show loader for this project
         try {
             await deleteProject(id);
             const filteredProjects = projects.filter((p) => p.projectId !== id);
@@ -72,8 +74,9 @@ const ProjectTab = () => {
         } catch (error) {
             console.error("Error deleting project:", error);
             toast.error("Failed to delete project");
+        } finally {
+            setDeletingId(null); // ✅ Hide loader
         }
-
     };
 
     const handleEdit = async (id) => {
@@ -86,12 +89,10 @@ const ProjectTab = () => {
             originIp: projectToEdit.originIp,
             projectType: projectToEdit.projectType,
         });
-        setIsEditing(true);  // mark as editing
+        setIsEditing(true);
         setShowModal(true);
     };
 
-
-    // Update project handler
     const handleUpdateProject = async () => {
         if (!formData.projectId) return;
         try {
@@ -137,14 +138,13 @@ const ProjectTab = () => {
                             originIp: "",
                             projectType: "custom",
                         });
-                        setIsEditing(false);  // mark as adding new
+                        setIsEditing(false);
                         setShowModal(true);
                     }}
                     className="flex items-center gap-2 bg-gray-400/20 border border-gray-300 px-4 py-1 rounded-lg font-semibold"
                 >
                     <span className="text-lg font-bold">+</span> Create New Project
                 </button>
-
             </motion.div>
 
             {/* Table */}
@@ -178,8 +178,15 @@ const ProjectTab = () => {
                                     animate={{ opacity: 1 }}
                                     className="border-b border-gray-600 hover:bg-gray-600/50"
                                 >
-                                    <td className="p-2"><button onClick={() => { setSelectedProject(project); setShowSelectedProjectModal(true); }} className="hover:underline cursor-pointer">{project.projectName}</button></td>
-                                    <td className="p-2">{project.projectType == "aicustom" ? "smart-mode" : "basic-mode"}</td>
+                                    <td className="p-2">
+                                        <button
+                                            onClick={() => { setSelectedProject(project); setShowSelectedProjectModal(true); }}
+                                            className="hover:underline cursor-pointer"
+                                        >
+                                            {project.projectName}
+                                        </button>
+                                    </td>
+                                    <td className="p-2">{project.projectType === "aicustom" ? "smart-mode" : "basic-mode"}</td>
                                     <td className="p-2">{project.originIp}</td>
                                     <td className="p-2">{new Date(project.createdAt).toLocaleDateString()}</td>
                                     <td className="p-2 flex justify-center gap-4">
@@ -191,9 +198,32 @@ const ProjectTab = () => {
                                         </button>
                                         <button
                                             onClick={() => handleDelete(project.projectId)}
-                                            className="text-red-400 hover:text-red-500"
+                                            className="text-red-400 hover:text-red-500 flex items-center gap-1"
                                         >
-                                            <i className="fi fi-rr-trash"></i>
+                                            {deletingId === project.projectId ? (
+                                                <svg
+                                                    className="animate-spin h-4 w-4 text-red-400"
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    fill="none"
+                                                    viewBox="0 0 24 24"
+                                                >
+                                                    <circle
+                                                        className="opacity-25"
+                                                        cx="12"
+                                                        cy="12"
+                                                        r="10"
+                                                        stroke="currentColor"
+                                                        strokeWidth="4"
+                                                    ></circle>
+                                                    <path
+                                                        className="opacity-75"
+                                                        fill="currentColor"
+                                                        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                                                    ></path>
+                                                </svg>
+                                            ) : (
+                                                <i className="fi fi-rr-trash"></i>
+                                            )}
                                         </button>
                                     </td>
                                 </motion.tr>
@@ -301,30 +331,21 @@ const ProjectTab = () => {
                                         "Save"
                                     )}
                                 </button>
-
-
                             </div>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {
-                showSelectedProjectModal && (
-                    <ModalProject
-                        isOpen={showSelectedProjectModal}
-                        onClose={() => setShowSelectedProjectModal(false)}
-                        projectData={selectedProject}
-                    />
-                )
-            }
+            {showSelectedProjectModal && (
+                <ModalProject
+                    isOpen={showSelectedProjectModal}
+                    onClose={() => setShowSelectedProjectModal(false)}
+                    projectData={selectedProject}
+                />
+            )}
         </div>
     );
 };
 
 export default ProjectTab;
-
-
-
-
-

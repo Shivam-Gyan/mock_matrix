@@ -105,6 +105,7 @@ const customJsonController = {
                     if (!project.JsonFile || typeof project.JsonFile !== 'string') {
                         throw new Error('AI returned empty or non-string response');
                     }
+                    console.log("project.JsonFile", project.JsonFile)
 
                     parsed = JSON.parse(project.JsonFile);
                 } catch (parseErr) {
@@ -112,7 +113,6 @@ const customJsonController = {
                         success: false,
                         message: 'Failed to parse AI response as valid JSON',
                         error: parseErr.message,
-                        rawResponse: aiResponse,
                     });
                 }
 
@@ -120,8 +120,7 @@ const customJsonController = {
                 if (!Array.isArray(parsed) || parsed.length !== 5 || !parsed.every(obj => typeof obj === 'object' && obj !== null && !Array.isArray(obj))) {
                     return res.status(502).json({
                         success: false,
-                        message: 'AI response is not a valid array of 5 non-null objects',
-                        rawResponse: aiResponse,
+                        message: 'AI response is not a valid array of 5 non-null objects'
                     });
                 }
             } else {
